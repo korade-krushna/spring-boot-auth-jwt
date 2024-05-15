@@ -2,16 +2,15 @@ package com.amaterasu.auth_service.entities;
 
 import com.amaterasu.auth_service.enums.Roles;
 import jakarta.persistence.*;
-import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Table(name = "users")
 @Entity
@@ -20,33 +19,37 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
+
     @Column(name = "username")
     private String username;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "enabled", columnDefinition = "boolean default true")
     private boolean enabled;
+
     @Column(name = "account_non_expired", columnDefinition = "boolean default false")
     private boolean accountNonExpired;
+
     @Column(name = "account_non_locked", columnDefinition = "boolean default false")
     private boolean accountNonLocked;
+
     @Column(name = "credentials_non_expired", columnDefinition = "boolean default false")
     private boolean credentialsNonExpired;
+
     @Column(name = "roles")
     private String roles;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String[] split = roles.split(",");
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         for (String role : split) {
-            Arrays.stream(Roles.valueOf(role).getAuthorities().split(",")).forEach(authority -> authorities.add((GrantedAuthority) () -> authority));
+            Arrays.stream(Roles.valueOf(role).getAuthorities().split(","))
+                    .forEach(authority -> authorities.add((GrantedAuthority) () -> authority));
         }
         return authorities;
     }

@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody UserSignUpRequest request) {
-       return ResponseEntity.ok(new ApiResponse<>(userService.signUp(request)));
+        return ResponseEntity.ok(new ApiResponse<>(userService.signUp(request)));
     }
 
     @GetMapping("/protected")

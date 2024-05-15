@@ -7,10 +7,9 @@ import com.amaterasu.auth_service.models.requests.UserSignUpRequest;
 import com.amaterasu.auth_service.models.response.UserLogInResponse;
 import com.amaterasu.auth_service.repositories.UserRepo;
 import com.amaterasu.auth_service.utils.JwtTokenUtil;
+import java.util.Optional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -48,6 +47,5 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRoles(request.getRoles());
         return userRepo.save(user);
-
     }
 }

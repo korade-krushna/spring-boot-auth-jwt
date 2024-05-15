@@ -1,6 +1,5 @@
 package com.amaterasu.auth_service.controllers;
 
-
 import com.amaterasu.auth_service.execeptions.ApiExecutionException;
 import com.amaterasu.auth_service.models.response.ApiResponse;
 import org.springframework.http.ResponseEntity;

@@ -5,6 +5,7 @@ public enum Roles {
     ADMIN("READ,WRITE");
 
     private final String authorities;
+
     Roles(String authorities) {
         this.authorities = authorities;
     }
@@ -12,5 +13,4 @@ public enum Roles {
     public String getAuthorities() {
         return authorities;
     }
-
 }
